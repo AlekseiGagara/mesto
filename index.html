@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="./pages/index.css" rel="stylesheet">
+  <title>Место</title>
+</head>
+<body class="page">
+  <header class="header">
+    <img
+      class="header__logo"
+      src="./images/header-logo.svg"
+      alt="Логотип">
+  </header>
+  <main class="content">
+
+      <!-- секция profile -->
+
+    <section class="user-profile">
+      <img src="./images/profile-image.jpg"
+      alt="фото пользователя"
+      class="user-profile__image">
+      <div class="user-profile__name-box">
+        <h1 class="user-profile__name">Жак-Ив Кусто</h1>
+        <button class="user-profile__edit-button"></button>
+        <p class="user-profile__description">Исследователь океана</p>
+      </div>
+      <button class="user-profile__add-button"></button>
+    </section>
+
+      <!-- секция places -->
+
+    <section class="places">
+      <div class="place">
+        <img src="./images/photo-grid-karachaevsk.jpg"
+        alt="фото места"
+        class="place__image">
+        <div class="place__title-box">
+          <h2 class="place__title">Карачаевск</h2>
+          <button class="place__like-button"></button>
+        </div>
+      </div>
+
+      <div class="place">
+        <img src="./images/photo-grid-elbrus.jpg"
+        alt="фото места"
+        class="place__image">
+        <div class="place__title-box">
+          <h2 class="place__title">Гора Эльбрус</h2>
+          <button class="place__like-button"></button>
+        </div>
+      </div>
+
+      <div class="place">
+        <img src="./images/photo-grid-dombai.jpg"
+        alt="фото места"
+        class="place__image">
+        <div class="place__title-box">
+          <h2 class="place__title">Домбай</h2>
+          <button class="place__like-button"></button>
+        </div>
+      </div>
+
+      <div class="place">
+        <img src="./images/photo-grid-BAO.jpg"
+        alt="фото места"
+        class="place__image">
+        <div class="place__title-box">
+          <h2 class="place__title">Большое Алматинское озеро</h2>
+          <button class="place__like-button"></button>
+        </div>
+      </div>
+
+      <div class="place">
+        <img src="./images/photo-grid-capadocia.jpg"
+        alt="фото места"
+        class="place__image">
+        <div class="place__title-box">
+          <h2 class="place__title">Кападокия</h2>
+          <button class="place__like-button"></button>
+        </div>
+      </div>
+
+      <div class="place">
+        <img src="./images/photo-grid-grand_canyon.jpg"
+        alt="фото места"
+        class="place__image">
+        <div class="place__title-box">
+          <h2 class="place__title">Гранд каньон</h2>
+          <button class="place__like-button"></button>
+        </div>
+      </div>
+    </section>
+
+      <!-- pop up -->
+    <div class="popup">
+      <div class="popup__overlay"></div>
+      <form action="" class="popup__container">
+        <h2 class="popup__heading">Редактировать профиль</h2>
+        <input type="text" class="popup__username">
+        <input type="text" class="popup__description">
+        <button class="popup__submit-button"></button>
+        <button class="popup__close-button"></button>
+      </form>
+    </div>
+  </main>
+  <footer class="footer">
+    <p class="footer__copyright">© 2023 Mesto Russia</p>
+  </footer>
+</body>
+</html>

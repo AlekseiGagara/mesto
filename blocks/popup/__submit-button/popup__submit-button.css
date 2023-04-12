@@ -1,0 +1,18 @@
+.popup__submit-button {
+  width: 238px;
+  height: 46px;
+  margin: 45px 0 0;
+  padding: 0;
+  border-style: none;
+  background-image: url("../../../images/submit-button-mobile.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-color: rgba(0, 0, 0, 0);
+}
+
+@media (min-width: 700px) {
+  .popup__submit-button {
+    background-image: url("../../../images/submit-button-1280.png");
+    width: 358px;
+  }
+}

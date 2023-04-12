@@ -1,0 +1,19 @@
+.user-profile__add-button {
+  width: 282px;
+  height: 50px;
+  margin: 36px 0 0;
+  padding: 0;
+  border-style: none;
+  background-image: url("../../../images/add_button_mobile.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-color: rgba(0, 0, 0, 0);
+}
+
+@media (min-width: 700px) {
+  .user-profile__add-button {
+    width: 150px;
+    background-image: url("../../../images/add_button_1280.png");
+    margin: auto;
+  }
+}
