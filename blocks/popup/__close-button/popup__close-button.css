@@ -4,7 +4,7 @@
   margin: 0;
   padding: 0;
   border-style: none;
-  background-image: url("../../../images/close-icon_mobile.png");
+  background-image: url("../../../images/close-icon_mobile.svg");
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
@@ -22,7 +22,7 @@
 
 @media (min-width: 700px) {
   .popup__close-button {
-    background-image: url("../../../images/close-icon_1280.png");
+    background-image: url("../../../images/close-icon_1280.svg");
     width: 32px;
     height: 32px;
     right: -40px;

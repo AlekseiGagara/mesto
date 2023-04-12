@@ -14,7 +14,6 @@
   .user-profile {
     width: calc(100% - 100px);
     padding-top: 40px;
-    justify-content: center;
     justify-items: start;
     grid-template-columns: 120px 1fr 150px;
     align-items: start;

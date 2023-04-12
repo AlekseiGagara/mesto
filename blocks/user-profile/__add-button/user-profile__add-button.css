@@ -4,7 +4,7 @@
   margin: 36px 0 0;
   padding: 0;
   border-style: none;
-  background-image: url("../../../images/add_button_mobile.png");
+  background-image: url("../../../images/add_button_mobile.svg");
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
@@ -21,7 +21,7 @@
 @media (min-width: 700px) {
   .user-profile__add-button {
     width: 150px;
-    background-image: url("../../../images/add_button_1280.png");
+    background-image: url("../../../images/add_button_1280.svg");
     margin: auto;
   }
 }
