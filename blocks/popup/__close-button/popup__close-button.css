@@ -6,11 +6,18 @@
   border-style: none;
   background-image: url("../../../images/close-icon_mobile.png");
   background-repeat: no-repeat;
+  background-position: center;
   background-size: cover;
   background-color: rgba(0, 0, 0, 0);
   position: absolute;
   right: 0;
   top: -36px;
+  transition: ease-in-out .2s;
+}
+
+.popup__close-button:hover {
+  opacity: .6;
+  cursor: pointer;
 }
 
 @media (min-width: 700px) {

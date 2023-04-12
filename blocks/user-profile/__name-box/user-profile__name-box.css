@@ -10,6 +10,7 @@
 
 @media (min-width: 700px) {
   .user-profile__name-box {
+    max-width: calc(100% - 50px);
     gap: 16px 18px;
     grid-template-columns: 1fr 24px;
     padding-left: 30px;

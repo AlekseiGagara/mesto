@@ -9,6 +9,12 @@
   overflow: hidden;
 }
 
+@media (min-width: 700px) {
+  .user-profile__name {
+    max-width: 100%;
+  }
+}
+
 @media (min-width: 940px) {
   .user-profile__name {
     font-size: 36px;
