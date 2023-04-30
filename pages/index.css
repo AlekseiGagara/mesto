@@ -22,15 +22,23 @@
 @import url(../blocks/place/__title-box/place__title-box.css);
 @import url(../blocks/place/__title/place__title.css);
 @import url(../blocks/place/__like-button/place__like-button.css);
+@import url(../blocks/place/__like-button/_like-active/place__like-button_like-active.css);
+@import url(../blocks/place/__delete-button/place__delete-button.css);
 
 @import url(../blocks/popup/popup.css);
 @import url(../blocks/popup/_opened/popup_opened.css);
 @import url(../blocks/popup/__overlay/popup__overlay.css);
+@import url(../blocks/popup/__overlay/_image/popup__overlay_image.css);
 @import url(../blocks/popup/__container/popup__container.css);
+@import url(../blocks/popup/__container/_image/popup__container_image.css);
+@import url(../blocks/popup/__image/popup__image.css);
+@import url(../blocks/popup/__image/_caption/popup__image_caption.css);
 @import url(../blocks/popup/__form/popup__form.css);
 @import url(../blocks/popup/__heading/popup__heading.css);
 @import url(../blocks/popup/__input/popup__input.css);
 @import url(../blocks/popup/__submit-button/popup__submit-button.css);
+@import url(../blocks/popup/__submit-button/_save/popup__submit-button_save.css);
+@import url(../blocks/popup/__submit-button/_create/popup__submit-button_create.css);
 @import url(../blocks/popup/__close-button/popup__close-button.css);
 
 

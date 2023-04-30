@@ -32,69 +32,12 @@
       <!-- секция places -->
 
     <section class="places">
-      <article class="place">
-        <img src="./images/photo-grid-karachaevsk.jpg"
-        alt="фото места"
-        class="place__image">
-        <div class="place__title-box">
-          <h2 class="place__title">Карачаевск</h2>
-          <button type="button" aria-label="лайк" class="place__like-button"></button>
-        </div>
-      </article>
 
-      <article class="place">
-        <img src="./images/photo-grid-elbrus.jpg"
-        alt="фото места"
-        class="place__image">
-        <div class="place__title-box">
-          <h2 class="place__title">Гора Эльбрус</h2>
-          <button type="button" aria-label="лайк" class="place__like-button"></button>
-        </div>
-      </article>
-
-      <article class="place">
-        <img src="./images/photo-grid-dombai.jpg"
-        alt="фото места"
-        class="place__image">
-        <div class="place__title-box">
-          <h2 class="place__title">Домбай</h2>
-          <button type="button" aria-label="лайк" class="place__like-button"></button>
-        </div>
-      </article>
-
-      <article class="place">
-        <img src="./images/photo-grid-BAO.jpg"
-        alt="фото места"
-        class="place__image">
-        <div class="place__title-box">
-          <h2 class="place__title">Большое Алматинское озеро</h2>
-          <button type="button" aria-label="лайк" class="place__like-button"></button>
-        </div>
-      </article>
-
-      <article class="place">
-        <img src="./images/photo-grid-capadocia.jpg"
-        alt="фото места"
-        class="place__image">
-        <div class="place__title-box">
-          <h2 class="place__title">Кападокия</h2>
-          <button type="button" aria-label="лайк" class="place__like-button"></button>
-        </div>
-      </article>
-
-      <article class="place">
-        <img src="./images/photo-grid-grand_canyon.jpg"
-        alt="фото места"
-        class="place__image">
-        <div class="place__title-box">
-          <h2 class="place__title">Гранд каньон</h2>
-          <button type="button" aria-label="лайк" class="place__like-button"></button>
-        </div>
-      </article>
     </section>
 
-      <!-- pop up -->
-    <div class="popup">
+      <!-- edit popup -->
+
+    <div class="popup popup__edit">
       <div class="popup__overlay"></div>
       <div class="popup__container">
         <form action="#" class="popup__form" name="editProfileForm">
@@ -105,15 +48,67 @@
           <input type="text"
           name="editInputDescription"
           class="popup__input popup__input_profile_description">
-          <button type="submit" aria-label="сохранить" class="popup__submit-button"></button>
+          <button type="submit" aria-label="сохранить" class="popup__submit-button popup__submit-button_save"></button>
         </form>
         <button type="button" aria-label="закрыть" class="popup__close-button"></button>
       </div>
     </div>
+
+    <!-- new place popup -->
+
+    <div class="popup popup__add-card">
+      <div class="popup__overlay"></div>
+      <div class="popup__container">
+        <form action="#" class="popup__form" name="addNewPlaceForm">
+          <h2 class="popup__heading">Новое место</h2>
+          <input type="text"
+          placeholder="Название"
+          name="addInputPlaceTitle"
+          class="popup__input popup__input_place_title">
+          <input type="text"
+          placeholder="Ссылка на картинку"
+          name="addInputPlaceLink"
+          class="popup__input popup__input_place_link">
+          <button type="submit" aria-label="создать" class="popup__submit-button popup__submit-button_create"></button>
+        </form>
+        <button type="button" aria-label="закрыть" class="popup__close-button"></button>
+      </div>
+    </div>
+
+    <!-- image popup -->
+
+    <div class="popup popup__zoom-image">
+      <div class="popup__overlay popup__overlay_image"></div>
+      <figure class="popup__container_image">
+        <img src=""
+        alt=""
+        class="popup__image">
+        <figcaption class="popup__image_caption"></figcaption>
+        <button type="button" aria-label="закрыть" class="popup__close-button"></button>
+      </figure>
+    </div>
+
   </main>
   <footer class="footer">
     <p class="footer__copyright">© 2023 Mesto Russia</p>
   </footer>
+
+  <!-- Template -->
+
+  <template id="place-template">
+    <article class="place">
+      <img src=""
+      alt=""
+      class="place__image">
+      <div class="place__title-box">
+        <h2 class="place__title"></h2>
+        <button type="button" aria-label="кнопка_лайк"
+        class="place__like-button"></button>
+      </div>
+      <button type="button" aria-label="кнопка_удалить"
+      class="place__delete-button"></button>
+    </article>
+  </template>
   <script src="./script/index.js"></script>
 </body>
 </html>
