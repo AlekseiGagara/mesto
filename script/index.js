@@ -4,11 +4,11 @@ const addCardButton = document.querySelector(".user-profile__add-button");
 const popupCloseButtons = document.querySelectorAll(".popup__close-button");
 // переменные для popup'ов и input'ов
 const popup = document.querySelector(".popup");
-const popupAddCard = document.querySelector(".popup__add-card");
-const popupEditProfile = document.querySelector(".popup__edit");
-const popupZoomImage = document.querySelector(".popup__zoom-image");
+const popupAddCard = document.querySelector(".popup_add-card");
+const popupEditProfile = document.querySelector(".popup_edit");
+const popupZoomImage = document.querySelector(".popup_zoom-image");
 const popupImage = document.querySelector(".popup__image");
-const popupImageCaption = document.querySelector(".popup__image_caption");
+const popupImageCaption = document.querySelector(".popup__image-caption");
 const addForm = document.querySelector('form[name="addNewPlaceForm"]');
 const editForm = document.querySelector('form[name="editProfileForm"]');
 const inputUsername = document.querySelector(".popup__input_profile_username");
