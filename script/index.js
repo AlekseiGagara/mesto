@@ -3,6 +3,7 @@ const editButton = document.querySelector(".user-profile__edit-button");
 const addCardButton = document.querySelector(".user-profile__add-button");
 const popupCloseButtons = document.querySelectorAll(".popup__close-button");
 // переменные для popup'ов и input'ов
+const popupOverlays = document.querySelectorAll(".popup__overlay");
 const popupAddCard = document.querySelector(".popup_add-card");
 const popupEditProfile = document.querySelector(".popup_edit");
 const popupZoomImage = document.querySelector(".popup_zoom-image");
@@ -84,6 +85,7 @@ function handleAddCardFormSubmit(evt) {
   //закрываем popup
   const popup = evt.target.closest(".popup");
   closePopup(popup);
+  evt.target.reset();
 }
 
 //слушатель для open popup EditProfile
@@ -100,6 +102,8 @@ addCardButton.addEventListener("click", () => openPopup(popupAddCard));
 //функция открытия popup
 function openPopup(popupType) {
   popupType.classList.add("popup_opened");
+  //добавляем слушатель нажатия Ecs и закрытия popup
+  document.addEventListener("keydown", handleEscape);
 }
 
 //цикл для кнопок закрытия, где выбирается ближайший popup к слушателю
@@ -124,6 +128,8 @@ function handleEditFormSubmit(evt) {
 //close popup
 function closePopup(popupType) {
   popupType.classList.remove("popup_opened");
+  //удаляем слушатель нажатия Ecs и закрытия popup
+  document.removeEventListener("keydown", handleEscape);
 }
 
 //слушатели события на кнопках submit
@@ -143,3 +149,19 @@ cardsContainer.addEventListener("click", (evt) => {
     placeElement.remove();
   }
 });
+
+//функция закрытия popup по клику на оверлей
+popupOverlays.forEach((overlay) => {
+  overlay.addEventListener("click", function (evt) {
+    const popup = evt.target.closest(".popup");
+    closePopup(popup);
+  });
+});
+
+//функция закрытия popup при нажатии Esc
+function handleEscape(event) {
+  if (event.key === "Escape") {
+    const popup = document.querySelector(".popup_opened");
+    closePopup(popup);
+  }
+}

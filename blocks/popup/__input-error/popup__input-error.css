@@ -1,0 +1,9 @@
+.popup__input-error {
+  max-width: 238px;
+}
+
+@media (min-width: 700px) {
+  .popup__input-error {
+    max-width: 358px;
+  }
+};
