@@ -10,20 +10,8 @@
   margin-top: 30px;
 }
 
-/* .popup__input:nth-of-type(1) {
-  margin-top: 75px;
-}
-
-.popup__input:nth-of-type(2) {
-  margin-top: 30px;
-} */
-
 @media (min-width: 700px) {
   .popup__input {
     width: 358px;
   }
-
-  /* .popup__input:nth-of-type(1) {
-    margin-top: 54px;
-  }
-} */
+}
