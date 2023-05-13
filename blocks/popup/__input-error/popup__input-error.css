@@ -1,5 +1,11 @@
 .popup__input-error {
   max-width: 238px;
+  color: red;
+  font-size: 12px;
+  line-height: 1.25;
+  position: absolute;
+  top: 58px;
+  left: 0;
 }
 
 @media (min-width: 700px) {

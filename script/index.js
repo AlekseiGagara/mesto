@@ -2,6 +2,7 @@
 const editButton = document.querySelector(".user-profile__edit-button");
 const addCardButton = document.querySelector(".user-profile__add-button");
 const popupCloseButtons = document.querySelectorAll(".popup__close-button");
+const createButton = document.querySelector(".popup__submit-button_create");
 // переменные для popup'ов и input'ов
 const popupOverlays = document.querySelectorAll(".popup__overlay");
 const popupAddCard = document.querySelector(".popup_add-card");
@@ -9,8 +10,8 @@ const popupEditProfile = document.querySelector(".popup_edit");
 const popupZoomImage = document.querySelector(".popup_zoom-image");
 const popupImage = document.querySelector(".popup__image");
 const popupImageCaption = document.querySelector(".popup__image-caption");
-const addForm = document.querySelector('form[name="addNewPlaceForm"]');
-const editForm = document.querySelector('form[name="editProfileForm"]');
+const NewPlaceForm = document.querySelector('form[name="NewPlaceForm"]');
+const ProfileForm = document.querySelector('form[name="ProfileForm"]');
 const inputUsername = document.querySelector(".popup__input_profile_username");
 const inputDescription = document.querySelector(".popup__input_profile_description");
 const userProfileName = document.querySelector(".user-profile__name");
@@ -85,6 +86,8 @@ function handleAddCardFormSubmit(evt) {
   //закрываем popup
   const popup = evt.target.closest(".popup");
   closePopup(popup);
+  createButton.classList.add('popup__submit-button_disabled');
+  createButton.disabled = true;
   evt.target.reset();
 }
 
@@ -133,8 +136,8 @@ function closePopup(popupType) {
 }
 
 //слушатели события на кнопках submit
-editForm.addEventListener("submit", handleEditFormSubmit);
-addForm.addEventListener("submit", handleAddCardFormSubmit);
+ProfileForm.addEventListener("submit", handleEditFormSubmit);
+NewPlaceForm.addEventListener("submit", handleAddCardFormSubmit);
 
 //функция и слушатель для лайков
 cardsContainer.addEventListener("click", (evt) => {
@@ -159,8 +162,8 @@ popupOverlays.forEach((overlay) => {
 });
 
 //функция закрытия popup при нажатии Esc
-function handleEscape(event) {
-  if (event.key === "Escape") {
+function handleEscape(evt) {
+  if (evt.key === "Escape") {
     const popup = document.querySelector(".popup_opened");
     closePopup(popup);
   }

@@ -36,9 +36,6 @@ const enableValidation = (validationSettings) => {
   const formList = Array.from(document.querySelectorAll(validationSettings.formSelector));
   //для каждой из форм в массиве вызываем функцию setEventListeners.
   formList.forEach((formElement) => {
-    formElement.addEventListener('submit',(evt) => {
-      evt.preventDefault();
-      });
     setEventListeners(formElement, validationSettings);
   });
 };

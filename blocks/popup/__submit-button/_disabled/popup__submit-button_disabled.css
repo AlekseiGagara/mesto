@@ -4,3 +4,9 @@
   opacity: .2;
   border: 1px solid rgb(0, 0, 0);
 }
+
+.popup__submit-button_disabled:hover {
+  cursor: default;
+  opacity: .2;
+}
+
