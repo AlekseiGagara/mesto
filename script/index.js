@@ -1,26 +1,26 @@
+import {FormValidator} from '../script/FormValidator.js';
+import {Card} from '../script/Card.js';
+
 // переменные для кнопок
 const editButton = document.querySelector(".user-profile__edit-button");
 const addCardButton = document.querySelector(".user-profile__add-button");
 const popupCloseButtons = document.querySelectorAll(".popup__close-button");
 const createButton = document.querySelector(".popup__submit-button_create");
+
 // переменные для popup'ов и input'ов
 const popupOverlays = document.querySelectorAll(".popup__overlay");
+const popupZoomImage = document.querySelector(".popup_zoom-image");
 const popupAddCard = document.querySelector(".popup_add-card");
 const popupEditProfile = document.querySelector(".popup_edit");
-const popupZoomImage = document.querySelector(".popup_zoom-image");
-const popupImage = document.querySelector(".popup__image");
-const popupImageCaption = document.querySelector(".popup__image-caption");
-const NewPlaceForm = document.querySelector('form[name="NewPlaceForm"]');
-const ProfileForm = document.querySelector('form[name="ProfileForm"]');
+const newPlaceForm = document.querySelector('form[name="newPlaceForm"]');
+const profileForm = document.querySelector('form[name="profileForm"]');
 const inputUsername = document.querySelector(".popup__input_profile_username");
 const inputDescription = document.querySelector(".popup__input_profile_description");
 const userProfileName = document.querySelector(".user-profile__name");
 const userProfileDescription = document.querySelector(".user-profile__description");
 const inputPlaceTitle = document.querySelector(".popup__input_place_title");
 const inputPlaceImageLink = document.querySelector(".popup__input_place_link");
-// переменные для добавления карточек в places
-const placeTemplate = document.querySelector("#place-template");
-const cardsContainer = document.querySelector(".places");
+
 // массив со стартовыми карточками
 const initialCards = [
   {
@@ -48,66 +48,54 @@ const initialCards = [
     link: "https://alekseigagara.github.io/mesto/images/photo-grid-BAO.jpg",
   },
 ];
-//функция создания новой карточки с обработчиком для Zoom по клику на фото
-function createCard(data) {
-  const cardElement = placeTemplate.content.cloneNode(true);
-  const placeTitle = cardElement.querySelector(".place__title");
-  const placeImage = cardElement.querySelector(".place__image");
-  placeTitle.textContent = data.name;
-  placeImage.src = data.link;
-  placeImage.alt = data.name;
-  placeImage.addEventListener("click", () => {
-    popupImage.src = data.link;
-    popupImage.alt = data.name;
-    popupImageCaption.textContent = data.name;
-    openPopup(popupZoomImage);
-  });
-  return cardElement;
-}
 
-// цикл для автоматического добавления стартовых карточек с использованием информации из массива
-initialCards.forEach(function (cardData) {
-  const cardElement = createCard(cardData);
-  // добавляем карточку в начало контейнера
-  cardsContainer.prepend(cardElement);
-});
-
-//функция добавления новой карточки на страницу
-function handleAddCardFormSubmit(evt) {
-  evt.preventDefault();
-  //создаем объект с данными для функции createCard
-  const cardData = {
-    name: inputPlaceTitle.value,
-    link: inputPlaceImageLink.value,
-  };
-  const cardElement = createCard(cardData);
-  // добавляем карточку в начало контейнера
-  cardsContainer.prepend(cardElement);
-  //закрываем popup
-  const popup = evt.target.closest(".popup");
-  closePopup(popup);
-  createButton.classList.add('popup__submit-button_disabled');
-  createButton.disabled = true;
-  evt.target.reset();
-}
-
-//слушатель для open popup EditProfile
-editButton.addEventListener("click", () => {
-  openPopup(popupEditProfile);
-  //присваиваем данные инпутам из текущей информации профиля
-  inputUsername.value = userProfileName.textContent;
-  inputDescription.value = userProfileDescription.textContent;
-});
-
-//слушатель open popup AddCard
-addCardButton.addEventListener("click", () => openPopup(popupAddCard));
+// массив с настройками валидации
+const validationSettings = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__submit-button',
+  inactiveButtonClass: 'popup__submit-button_disabled',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__error_visible'
+};
 
 //функция открытия popup
-function openPopup(popupType) {
+const openPopup = (popupType) => {
   popupType.classList.add("popup_opened");
   //добавляем слушатель нажатия Ecs и закрытия popup
   document.addEventListener("keydown", handleEscape);
-}
+};
+
+//функция для открытия popup Image
+const setEventListenerPopupImage = (itemData) => {
+  const placeImage = document.querySelector(".place__image");
+  const popupImage = document.querySelector(".popup__image");
+  const popupImageCaption = document.querySelector(".popup__image-caption");
+    //слушатель для popup Image
+  placeImage.addEventListener("click", () => {
+    popupImage.src = itemData.link;
+    popupImage.alt = itemData.name;
+    popupImageCaption.textContent = itemData.name;
+    openPopup(popupZoomImage);
+  });
+};
+
+// цикл для добавления стартовых карточек
+//с использованием информации из массива initialCards
+initialCards.forEach((itemData) => {
+  // создаем экземпляр карточки из класса Card
+  const card = new Card(itemData, '.place-template_type_default');
+  // публикуем карточку
+  card.renderCard();
+  setEventListenerPopupImage(itemData);
+});
+
+//close popup
+const closePopup = (popupType) => {
+  popupType.classList.remove("popup_opened");
+  //удаляем слушатель нажатия Ecs и закрытия popup
+  document.removeEventListener("keydown", handleEscape);
+};
 
 //цикл для кнопок закрытия, где выбирается ближайший popup к слушателю
 popupCloseButtons.forEach((button) => {
@@ -117,8 +105,24 @@ popupCloseButtons.forEach((button) => {
   });
 });
 
+//закрытие popup по клику на оверлей
+popupOverlays.forEach((overlay) => {
+  overlay.addEventListener("click", function (evt) {
+    const popup = evt.target.closest(".popup");
+    closePopup(popup);
+  });
+});
+
+//функция закрытия popup при нажатии Esc
+const handleEscape = (evt) => {
+  if (evt.key === "Escape") {
+    const popup = document.querySelector(".popup_opened");
+    closePopup(popup);
+  }
+}
+
 //функция редактирования профиля
-function handleEditFormSubmit(evt) {
+const handleEditFormSubmit = (evt) => {
   evt.preventDefault();
   //присваиваем значения из инпутов
   userProfileName.textContent = inputUsername.value;
@@ -128,43 +132,47 @@ function handleEditFormSubmit(evt) {
   closePopup(popup);
 }
 
-//close popup
-function closePopup(popupType) {
-  popupType.classList.remove("popup_opened");
-  //удаляем слушатель нажатия Ecs и закрытия popup
-  document.removeEventListener("keydown", handleEscape);
+//функция добавления новой карточки на страницу
+const handleAddCardFormSubmit = (evt) => {
+  evt.preventDefault();
+  //создаем объект с данными для создания экземпляра Card
+  const cardData = {
+    name: inputPlaceTitle.value,
+    link: inputPlaceImageLink.value,
+  };
+  // создаем экземпляр карточки из класса Card
+  const card = new Card(cardData, '.place-template_type_default');
+  // публикуем карточку
+  card.renderCard();
+  setEventListenerPopupImage(cardData);
+  //закрываем popup
+  const popup = evt.target.closest(".popup");
+  closePopup(popup);
+  createButton.classList.add('popup__submit-button_disabled');
+  createButton.disabled = true;
+  evt.target.reset();
 }
 
 //слушатели события на кнопках submit
-ProfileForm.addEventListener("submit", handleEditFormSubmit);
-NewPlaceForm.addEventListener("submit", handleAddCardFormSubmit);
+profileForm.addEventListener("submit", handleEditFormSubmit);
+newPlaceForm.addEventListener("submit", handleAddCardFormSubmit);
 
-//функция и слушатель для лайков
-cardsContainer.addEventListener("click", (evt) => {
-  if (evt.target.classList.contains("place__like-button")) {
-    evt.target.classList.toggle("place__like-button_like-active");
-  }
-});
-//функция и слушатель для удаления
-cardsContainer.addEventListener("click", (evt) => {
-  if (evt.target.classList.contains("place__delete-button")) {
-    const placeElement = evt.target.closest(".place");
-    placeElement.remove();
-  }
+//слушатель open popup AddCard
+addCardButton.addEventListener("click", () => openPopup(popupAddCard));
+
+//слушатель для open popup EditProfile
+editButton.addEventListener("click", () => {
+  openPopup(popupEditProfile);
+  //присваиваем данные инпутам из текущей информации профиля
+  inputUsername.value = userProfileName.textContent;
+  inputDescription.value = userProfileDescription.textContent;
 });
 
-//функция закрытия popup по клику на оверлей
-popupOverlays.forEach((overlay) => {
-  overlay.addEventListener("click", function (evt) {
-    const popup = evt.target.closest(".popup");
-    closePopup(popup);
-  });
-});
+const newPlaceFormValidation = new FormValidator(validationSettings, newPlaceForm);
+newPlaceFormValidation.enableValidation();
 
-//функция закрытия popup при нажатии Esc
-function handleEscape(evt) {
-  if (evt.key === "Escape") {
-    const popup = document.querySelector(".popup_opened");
-    closePopup(popup);
-  }
-}
+const profileFormValidation = new FormValidator(validationSettings, profileForm);
+profileFormValidation.enableValidation();
+
+
+
