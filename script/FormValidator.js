@@ -2,39 +2,44 @@ export class FormValidator {
   constructor(settings, formElement) {
     this._settings = settings;
     this._formElement = formElement;
+    //собираем все инпуты внутри формы в массив.
+    this._inputList = Array.from(formElement.querySelectorAll(settings.inputSelector));
+    this._buttonElement = formElement.querySelector(settings.submitButtonSelector);
   };
 
   //метод, устанавливающий слушателей
   _setEventListeners() {
-      //собираем все инпуты внутри формы в массив.
-    const inputList = Array.from(this._formElement.querySelectorAll(this._settings.inputSelector));
-    const buttonElement = this._formElement.querySelector(this._settings.submitButtonSelector);
     // вызываем метод для проверки состояния кнопки submit
-    this._handleButtonState(inputList, buttonElement);
+    this._handleButtonState();
     //на каждый инпут вешаем слушатель с колбеком, вызывающим метод _isValid.
-    inputList.forEach((inputElement) => {
+    this._inputList.forEach((inputElement) => {
       inputElement.addEventListener('input', () => {
         this._checkIsInputValid(inputElement);
-        this._handleButtonState(inputList, buttonElement);
+        this._handleButtonState();
       });
     });
   };
 
   //метод переключает состояние кнопки submit
-  _handleButtonState(inputList, buttonElement) {
-    if (this._hasInvalidInput(inputList)) {
-      buttonElement.classList.add(this._settings.inactiveButtonClass);
-      buttonElement.disabled = true;
+  _handleButtonState() {
+    if (this._hasInvalidInput()) {
+      this._buttonElement.classList.add(this._settings.inactiveButtonClass);
+      this._buttonElement.disabled = true;
     } else {
-      buttonElement.classList.remove(this._settings.inactiveButtonClass);
-      buttonElement.disabled = false;
+      this._buttonElement.classList.remove(this._settings.inactiveButtonClass);
+      this._buttonElement.disabled = false;
     };
 
   };
 
+  disableSubmitButton() {
+    this._buttonElement.classList.add('popup__submit-button_disabled');
+    this._buttonElement.disabled = true;
+  }
+
   //метод проверки каждого инпута на валидность в помощью метода массива .some()
-  _hasInvalidInput(inputList) {
-    return inputList.some((inputElement) => {
+  _hasInvalidInput() {
+    return this._inputList.some((inputElement) => {
       return !inputElement.validity.valid;
     });
   };

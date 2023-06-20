@@ -1,5 +1,6 @@
 import {FormValidator} from '../script/FormValidator.js';
 import {Card} from '../script/Card.js';
+import {initialCards} from '../script/constants.js';
 
 // переменные для кнопок
 const editButton = document.querySelector(".user-profile__edit-button");
@@ -9,7 +10,6 @@ const createButton = document.querySelector(".popup__submit-button_create");
 
 // переменные для popup'ов и input'ов
 const popupOverlays = document.querySelectorAll(".popup__overlay");
-const popupZoomImage = document.querySelector(".popup_zoom-image");
 const popupAddCard = document.querySelector(".popup_add-card");
 const popupEditProfile = document.querySelector(".popup_edit");
 const newPlaceForm = document.querySelector('form[name="newPlaceForm"]');
@@ -21,33 +21,6 @@ const userProfileDescription = document.querySelector(".user-profile__descriptio
 const inputPlaceTitle = document.querySelector(".popup__input_place_title");
 const inputPlaceImageLink = document.querySelector(".popup__input_place_link");
 
-// массив со стартовыми карточками
-const initialCards = [
-  {
-    name: "Карачаевск",
-    link: "https://alekseigagara.github.io/mesto/images/photo-grid-karachaevsk.jpg",
-  },
-  {
-    name: "Гора Эльбрус",
-    link: "https://alekseigagara.github.io/mesto/images/photo-grid-elbrus.jpg",
-  },
-  {
-    name: "Домбай",
-    link: "https://alekseigagara.github.io/mesto/images/photo-grid-dombai.jpg",
-  },
-  {
-    name: "Гранд-Каньон",
-    link: "https://alekseigagara.github.io/mesto/images/photo-grid-grand_canyon.jpg",
-  },
-  {
-    name: "Каппадокия",
-    link: "https://alekseigagara.github.io/mesto/images/photo-grid-capadocia.jpg",
-  },
-  {
-    name: "Большое Алматинское озеро",
-    link: "https://alekseigagara.github.io/mesto/images/photo-grid-BAO.jpg",
-  },
-];
 
 // массив с настройками валидации
 const validationSettings = {
@@ -66,20 +39,6 @@ const openPopup = (popupType) => {
   document.addEventListener("keydown", handleEscape);
 };
 
-//функция для открытия popup Image
-const setEventListenerPopupImage = (itemData) => {
-  const placeImage = document.querySelector(".place__image");
-  const popupImage = document.querySelector(".popup__image");
-  const popupImageCaption = document.querySelector(".popup__image-caption");
-    //слушатель для popup Image
-  placeImage.addEventListener("click", () => {
-    popupImage.src = itemData.link;
-    popupImage.alt = itemData.name;
-    popupImageCaption.textContent = itemData.name;
-    openPopup(popupZoomImage);
-  });
-};
-
 // цикл для добавления стартовых карточек
 //с использованием информации из массива initialCards
 initialCards.forEach((itemData) => {
@@ -87,7 +46,6 @@ initialCards.forEach((itemData) => {
   const card = new Card(itemData, '.place-template_type_default');
   // публикуем карточку
   card.renderCard();
-  setEventListenerPopupImage(itemData);
 });
 
 //close popup
@@ -144,12 +102,11 @@ const handleAddCardFormSubmit = (evt) => {
   const card = new Card(cardData, '.place-template_type_default');
   // публикуем карточку
   card.renderCard();
-  setEventListenerPopupImage(cardData);
-  //закрываем popup
-  const popup = evt.target.closest(".popup");
-  closePopup(popup);
-  createButton.classList.add('popup__submit-button_disabled');
-  createButton.disabled = true;
+  // закрываем popup
+  closePopup(popupAddCard);
+  // после создания карточки передаем кнопке состояние disabled
+  newPlaceFormValidation.disableSubmitButton();
+  // сбрасываем значения инпутов в форме
   evt.target.reset();
 }
 

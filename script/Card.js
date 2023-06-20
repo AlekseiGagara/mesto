@@ -50,6 +50,22 @@ export class Card {
     .addEventListener("click", () => {
       this._handleDeleteCard();
     });
+   // слушатель popup Image
+    this._element.querySelector(".place__image")
+    .addEventListener("click", () => {
+      this._handleImagePopup();
+    });
+  }
+
+  // метод для открытия popup Image
+  _handleImagePopup() {
+    const popupZoomImage = document.querySelector(".popup_zoom-image");
+    const popupImage = popupZoomImage.querySelector(".popup__image");
+    const popupImageCaption = popupZoomImage.querySelector(".popup__image-caption");
+    popupImage.src = this._src;
+    popupImage.alt = this._alt;
+    popupImageCaption.textContent = this._title;
+    popupZoomImage.classList.add("popup_opened");
   }
 
   // метод для удаления карточки
