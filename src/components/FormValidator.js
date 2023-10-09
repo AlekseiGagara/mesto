@@ -23,8 +23,7 @@ export default class FormValidator {
   //метод переключает состояние кнопки submit
   _handleButtonState() {
     if (this._hasInvalidInput()) {
-      this._buttonElement.classList.add(this._settings.inactiveButtonClass);
-      this._buttonElement.disabled = true;
+      this.disableSubmitButton();
     } else {
       this._buttonElement.classList.remove(this._settings.inactiveButtonClass);
       this._buttonElement.disabled = false;
@@ -33,7 +32,7 @@ export default class FormValidator {
   };
 
   disableSubmitButton() {
-    this._buttonElement.classList.add('popup__submit-button_disabled');
+    this._buttonElement.classList.add(this._settings.inactiveButtonClass);
     this._buttonElement.disabled = true;
   }
 

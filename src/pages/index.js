@@ -1,22 +1,28 @@
-import './pages/index.css';
-import FormValidator from './components/FormValidator';
-import Card from './components/Card.js';
-import Section from './components/Section.js';
-import PopupWithImage from './components/PopupWithImage.js';
-import PopupWithForm from './components/PopupWithForm.js';
-import UserInfo from './components/UserInfo.js';
-import {initialCards,
-  editButton,
-  addCardButton,
-  cardsContainer,
-  popupAddCard,
-  popupEditProfile,
-  popupZoomImage,
-  newPlaceForm,
-  profileForm,
-  inputUsername,
-  inputDescription,
-  validationSettings} from './utils/constants.js';
+import './index.css';
+import FormValidator from '../components/FormValidator';
+import Card from '../components/Card.js';
+import Section from '../components/Section.js';
+import PopupWithImage from '../components/PopupWithImage.js';
+import PopupWithForm from '../components/PopupWithForm.js';
+import UserInfo from '../components/UserInfo.js';
+import {initialCards, validationSettings} from '../utils/constants.js';
+
+//контейнер для карточек
+const cardsContainer = ".places";
+
+// переменные для popup'ов и input'ов
+const popupAddCard = ".popup_add-card";
+const popupEditProfile = ".popup_edit";
+const popupZoomImage = ".popup_zoom-image";
+
+// переменные для кнопок
+const editButton = document.querySelector(".user-profile__edit-button");
+const addCardButton = document.querySelector(".user-profile__add-button");
+
+const newPlaceForm = document.querySelector('form[name="newPlaceForm"]');
+const profileForm = document.querySelector('form[name="profileForm"]');
+const inputUsername = document.querySelector(".popup__input_profile_username");
+const inputDescription = document.querySelector(".popup__input_profile_description");
 
 const newPlaceFormValidation = new FormValidator(validationSettings, newPlaceForm);
 newPlaceFormValidation.enableValidation();
@@ -28,9 +34,11 @@ profileFormValidation.enableValidation();
 const popupWithImage = new PopupWithImage(popupZoomImage);
 const popupAddPlace = new PopupWithForm(popupAddCard, (formData) => {
   handleAddCardFormSubmit(formData);
+  popupAddPlace.close();
 });
 const popupEditForm = new PopupWithForm(popupEditProfile, (formData) => {
   handleEditFormSubmit(formData);
+  popupEditForm.close();
 });
 
 popupWithImage.setEventListeners();
@@ -43,25 +51,11 @@ const userData = new UserInfo({
   profileInfoSelector: ".user-profile__description",
 });
 
-const defaultCards = new Section({
-  data: initialCards,
-  renderer: (itemData) => {
-    const cardElement = newCard(itemData);
-    defaultCards.addItem(cardElement);
-    }
-  },
-  cardsContainer
-);
-
-//слушатель open popup AddCard
-addCardButton.addEventListener("click", () => {
-  popupAddPlace.open();
-});
-
 //функция для передачи данных в попап с картинкой, используется в конструкторе класса Card
 const handleImagePopup = (imageTitle, imageLink) => {
   popupWithImage.open(imageTitle, imageLink);
 };
+
 
 // функция для создания экземпляра класса Card
 const newCard = (cardData) => {
@@ -73,17 +67,34 @@ const newCard = (cardData) => {
   return card.generateCard();
 };
 
+const defaultCards = new Section({
+  data: initialCards,
+  renderer: (itemData) => {
+    const cardElement = newCard(itemData);
+    defaultCards.addItem(cardElement);
+    }
+  },
+  cardsContainer
+);
+
+defaultCards.renderItems();
+
+//слушатель open popup AddCard
+addCardButton.addEventListener("click", () => {
+  popupAddPlace.open();
+});
+
 
 //слушатель для open popup EditProfile
 editButton.addEventListener("click", () => {
   popupEditForm.open();
   //присваиваем данные инпутам из текущей информации профиля
-  const CurrentUserInfo = userData.getUserInfo();
-  inputUsername.value = CurrentUserInfo.userName;
-  inputDescription.value = CurrentUserInfo.userProfileInfo;
+  const currentUserInfo = userData.getUserInfo();
+  inputUsername.value = currentUserInfo.userName;
+  inputDescription.value = currentUserInfo.userProfileInfo;
 });
 
-defaultCards.renderItems();
+
 
 //функция добавления новой карточки на страницу
 const handleAddCardFormSubmit = (formData) => {

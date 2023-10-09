@@ -58,6 +58,7 @@ export default class Card {
   // метод для удаления карточки
   _handleDeleteCard() {
     this._element.remove();
+    this._element = null;
   }
 
   // метод реализации функцционала кнопки like
