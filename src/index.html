@@ -3,14 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="./pages/index.css" rel="stylesheet">
   <title>Место</title>
 </head>
 <body class="page">
   <header class="header">
     <img
       class="header__logo"
-      src="./images/header-logo.svg"
+      src="<%=require('./images/header-logo.svg')%>"
       alt="Логотип">
   </header>
   <main class="content">
@@ -18,7 +17,7 @@
       <!-- секция profile -->
 
     <section class="user-profile">
-      <img src="./images/profile-image.jpg"
+      <img src="<%=require('./images/profile-image.jpg')%>"
       alt="фото пользователя"
       class="user-profile__image">
       <div class="user-profile__name-box">
@@ -131,6 +130,6 @@
       class="place__delete-button"></button>
     </article>
   </template>
-  <script type="module" src="./pages/index.js"></script>
+
 </body>
 </html>
