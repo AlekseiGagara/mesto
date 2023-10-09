@@ -1,8 +1,9 @@
-export class Card {
-  constructor(cardData, templateSelector) {
+export default class Card {
+  constructor({data: cardData}, handleCardClick, templateSelector) {
     this._title = cardData.name;
     this._src = cardData.link;
     this._alt = cardData.name;
+    this._handleCardClick = handleCardClick;
     this._templateSelector = templateSelector;
   };
 
@@ -18,7 +19,7 @@ export class Card {
   };
 
   // метод подготовки к публикации, добавляем данные в разметку
-  _generateCard() {
+  generateCard() {
     // в поле _element элемент записываем разметку через метод getTemplate()
     this._element = this._getTemplate();
     this._setEventListeners();
@@ -29,14 +30,6 @@ export class Card {
     // возвращаем готовую к публикации карточку
     return this._element;
   };
-
-  renderCard() {
-    // создаем карточку и возращаем ее для публикации
-    const cardElement = this._generateCard();
-    const cardsContainer = document.querySelector(".places");
-    // добавляем елемент в начало cardsContainer
-    cardsContainer.prepend(cardElement);
-  }
 
   // метод для добавления слушателей событий карточке в generateCard()
   _setEventListeners() {
@@ -59,13 +52,7 @@ export class Card {
 
   // метод для открытия popup Image
   _handleImagePopup() {
-    const popupZoomImage = document.querySelector(".popup_zoom-image");
-    const popupImage = popupZoomImage.querySelector(".popup__image");
-    const popupImageCaption = popupZoomImage.querySelector(".popup__image-caption");
-    popupImage.src = this._src;
-    popupImage.alt = this._alt;
-    popupImageCaption.textContent = this._title;
-    popupZoomImage.classList.add("popup_opened");
+    this._handleCardClick(this._title, this._src);
   }
 
   // метод для удаления карточки
