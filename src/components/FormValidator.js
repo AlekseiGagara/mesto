@@ -70,7 +70,7 @@ export default class FormValidator {
     inputElement.classList.remove(this._settings.inputErrorClass);
     // скрываем сообщение об ошибке
     formError.textContent = '';
-    formError.classList.add(this._settings.errorClass);
+    formError.classList.remove(this._settings.errorClass);
   };
 
   //метод, включающий валидацию формы

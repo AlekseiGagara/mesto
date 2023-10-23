@@ -17,13 +17,18 @@
       <!-- секция profile -->
 
     <section class="user-profile">
-      <img src="<%=require('./images/profile-image.jpg')%>"
-      alt="фото пользователя"
-      class="user-profile__image">
+      <div class="user-profile__image-container">
+        <img src=""
+          alt="фото пользователя"
+          class="user-profile__image">
+        <div class="user-profile__image-overlay">
+          <div class="user-profile__image-edit-icon"></div>
+        </div>
+      </div>
       <div class="user-profile__name-box">
-        <h1 class="user-profile__name">Жак-Ив Кусто</h1>
+        <h1 class="user-profile__name"></h1>
         <button type="button" aria-label="редактировать" class="user-profile__edit-button"></button>
-        <p class="user-profile__description">Исследователь океана</p>
+        <p class="user-profile__description"></p>
       </div>
       <button type="button" aria-label="добавить место" class="user-profile__add-button"></button>
     </section>
@@ -59,7 +64,7 @@
             required>
             <span class="popup__input-error description-input-error"></span>
           </div>
-          <button type="submit" aria-label="сохранить" class="popup__submit-button">Сохранить</button>
+          <button type="submit" aria-label="сохранить-профиль" class="popup__submit-button">Сохранить</button>
         </form>
         <button type="button" aria-label="закрыть" class="popup__close-button"></button>
       </div>
@@ -96,6 +101,38 @@
       </div>
     </div>
 
+    <!-- confirm popup -->
+
+    <div class="popup popup_confirm">
+      <div class="popup__overlay"></div>
+      <div class="popup__container">
+        <h2 class="popup__heading">Вы уверены?</h2>
+        <button type="button" aria-label="согласие" class="popup__submit-button">Да</button>
+        <button type="button" aria-label="закрыть" class="popup__close-button"></button>
+      </div>
+    </div>
+
+    <!-- user-image popup -->
+
+    <div class="popup popup_user-image">
+      <div class="popup__overlay"></div>
+      <div class="popup__container">
+        <h2 class="popup__heading">Обновить аватар</h2>
+        <form action="" class="popup__form" name="editUserImage" novalidate>
+          <div class="popup__input-container">
+            <input type="url"
+            placeholder="Ссылка на картинку"
+            name="userImageLink-input"
+            class="popup__input popup__input_avatar_link"
+            required>
+            <span class="popup__input-error userImageLink-input-error"></span>
+          </div>
+          <button type="submit" aria-label="сохранить-аватар" class="popup__submit-button">Сохранить</button>
+        </form>
+        <button type="button" aria-label="закрыть" class="popup__close-button"></button>
+      </div>
+    </div>
+
     <!-- image popup -->
 
     <div class="popup popup_zoom-image">
@@ -123,8 +160,11 @@
       class="place__image">
       <div class="place__title-box">
         <h2 class="place__title"></h2>
-        <button type="button" aria-label="кнопка_лайк"
-        class="place__like-button"></button>
+        <div class="place__like-counterbox">
+          <button type="button" aria-label="кнопка_лайк"
+          class="place__like-button"></button>
+          <p class="place__like-counter"></p>
+        </div>
       </div>
       <button type="button" aria-label="кнопка_удалить"
       class="place__delete-button"></button>

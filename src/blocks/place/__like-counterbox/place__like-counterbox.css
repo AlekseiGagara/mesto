@@ -1,0 +1,5 @@
+.place__like-counterbox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

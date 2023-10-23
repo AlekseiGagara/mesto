@@ -1,6 +1,5 @@
 export default class Section {
-  constructor({ data: items, renderer }, containerSelector) {
-    this._renderedItems = items;
+  constructor({ renderer }, containerSelector) {
     this._renderer = renderer;
     this._container = document.querySelector(containerSelector);
   }
@@ -9,9 +8,9 @@ export default class Section {
     this._container.prepend(element);
   }
 
-// метод вызывающий получаемую в конструктор функцию renderer для каждого элемента получаемого в конструктор массива
-  renderItems() {
-    this._renderedItems.forEach(item => {
+// метод, вызывающий получаемую в конструктор функцию renderer для каждого элемента переданного масива
+  renderItems(data) {
+    data.forEach(item => {
       this._renderer(item);
     });
   }

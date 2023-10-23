@@ -1,31 +1,3 @@
-// массив со стартовыми карточками
-export const initialCards = [
-  {
-    name: "Карачаевск",
-    link: "https://alekseigagara.github.io/mesto/images/photo-grid-karachaevsk.jpg",
-  },
-  {
-    name: "Гора Эльбрус",
-    link: "https://alekseigagara.github.io/mesto/images/photo-grid-elbrus.jpg",
-  },
-  {
-    name: "Домбай",
-    link: "https://alekseigagara.github.io/mesto/images/photo-grid-dombai.jpg",
-  },
-  {
-    name: "Гранд-Каньон",
-    link: "https://alekseigagara.github.io/mesto/images/photo-grid-grand_canyon.jpg",
-  },
-  {
-    name: "Каппадокия",
-    link: "https://alekseigagara.github.io/mesto/images/photo-grid-capadocia.jpg",
-  },
-  {
-    name: "Большое Алматинское озеро",
-    link: "https://alekseigagara.github.io/mesto/images/photo-grid-BAO.jpg",
-  },
-];
-
 // массив с настройками валидации
 export const validationSettings = {
   formSelector: '.popup__form',
@@ -35,3 +7,14 @@ export const validationSettings = {
   inputErrorClass: 'popup__input_type_error',
   errorClass: 'popup__error_visible'
 };
+
+// массив с настройками Api
+export const apiSettings = {
+  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-77',
+  headers: {
+    authorization: '48764543-f2b3-448b-a918-5c4dcafe4f65',
+    'Content-Type': 'application/json'
+  },
+};
+
+
