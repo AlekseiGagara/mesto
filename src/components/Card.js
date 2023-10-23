@@ -38,6 +38,7 @@ export default class Card {
     this._element.ownerId = this._ownerID;
     this._element.querySelector(".place__like-counter").textContent = `${this._likesArr.length}`;
     this._showLikedCards();
+    this.isMyCard();
     // возвращаем готовую к публикации карточку
     return this._element;
   };
@@ -71,6 +72,19 @@ export default class Card {
     this._handleDeletePopup(this);
   }
 
+  //публичный метод для удаления элемента карточки после подтвеждения
+  deleteCard() {
+    this._element.remove();
+    this._element = null;
+  }
+
+  isMyCard() {
+    if (this._ownerID !== this._myUserId) {
+      this._element.querySelector(".place__delete-button")
+      .style.display = 'none';
+    }
+  }
+
   //метод для отрисовки лайков загруженным карточкам
   _showLikedCards() {
     if(this._isLikedByMe()) {
@@ -85,9 +99,12 @@ export default class Card {
   }
 
   //метод для обновления лайков на странице после ответа сервера
-  updateLikes(newLikesData) {
-    this._likesArr = newLikesData.likes;
-    this._element.querySelector(".place__like-counter").textContent = `${newLikesData.likes.length}`;
+  updateLikes(resData) {
+    this._likesArr = resData.likes;
+    this._element.querySelector(".place__like-counter")
+    .textContent = `${resData.likes.length}`;
+    this._element.querySelector(".place__like-button")
+    .classList.toggle("place__like-button_like-active");
   }
 
   // метод реализации функцционала кнопки like
